@@ -29,4 +29,12 @@ public class EmployeeController {
         employeeService.removeEmployee(employee);
         return employee + " удален.";
     }
+
+    @GetMapping(path = "/find")
+    public String findEmployee(@RequestParam("firstName") String firstName,
+                               @RequestParam("lastName") String lastName) {
+        Employee employee = new Employee(firstName, lastName);
+        employeeService.findEmployee(employee);
+        return employee + " найден.";
+    }
 }

@@ -8,11 +8,10 @@ import java.util.List;
 
 @Service
 public class EmployeeService implements EmployeeInterface {
-    private final static int listSize = 10;
+    private final static int maxListSize = 10;
 
     List<Employee> employees = new ArrayList<>(Arrays.asList(
             new Employee("Владимир", "Скрягин"),
-            new Employee("Алиса", "Засранкина"),
             new Employee("Максим", "Чистоплюев"),
             new Employee("Алина", "Незнайкина"),
             new Employee("Светлана", "Страдалкина"),
@@ -22,20 +21,31 @@ public class EmployeeService implements EmployeeInterface {
             new Employee("Софья", "Засыпалкина"),
             new Employee("Андрей", "Приставалкин")
     ));
-    Integer sizeEmployeeList = employees.size();
 
     @Override
     public void addEmployee(Employee employee) {
+        if (employees.size() >= maxListSize) {
+            throw new EmployeeStorageIsFullException("Мест в организации нет");
+        } else if (employees.contains(employee)) {
+            throw new EmployeeAlreadyAddedException("Сотрудник уже добавлен");
+        }
         employees.add(employee);
     }
 
     @Override
     public void removeEmployee(Employee employee) {
+        if (!employees.contains(employee)) {
+            throw new EmployeeNotFoundException("Сотрудник не найден");
+        }
         employees.remove(employee);
     }
 
+
     @Override
-    public void foundEmployee(Employee employee) {
+    public void findEmployee(Employee employee) {
+        if (!employees.contains(employee)) {
+            throw new EmployeeNotFoundException("Сотрудник не найден");
+        }
         employees.toString();
     }
 }

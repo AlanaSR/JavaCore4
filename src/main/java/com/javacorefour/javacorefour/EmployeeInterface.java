@@ -5,5 +5,5 @@ public interface EmployeeInterface {
 
     void removeEmployee(Employee employee);
 
-    void foundEmployee(Employee employee);
+    void findEmployee(Employee employee);
 }
