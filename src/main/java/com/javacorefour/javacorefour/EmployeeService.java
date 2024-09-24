@@ -23,6 +23,11 @@ public class EmployeeService implements EmployeeInterface {
     ));
 
     @Override
+    public List<Employee> printEmployee() {
+        return employees;
+    }
+
+    @Override
     public void addEmployee(Employee employee) {
         if (employees.size() >= maxListSize) {
             throw new EmployeeStorageIsFullException("Мест в организации нет");

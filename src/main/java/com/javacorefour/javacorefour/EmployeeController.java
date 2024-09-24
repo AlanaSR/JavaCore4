@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
+import java.util.List;
+
 @RequestMapping("/employee")
 @RestController
 public class EmployeeController {
@@ -12,6 +15,11 @@ public class EmployeeController {
 
     public EmployeeController(EmployeeInterface employeeService) {
         this.employeeService = employeeService;
+    }
+
+    @GetMapping(path = "/print")
+    public List<Employee> print() {
+        return employeeService.printEmployee();
     }
 
     @GetMapping(path = "/add")
