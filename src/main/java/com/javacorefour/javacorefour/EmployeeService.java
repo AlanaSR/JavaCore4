@@ -2,55 +2,72 @@ package com.javacorefour.javacorefour;
 
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class EmployeeService implements EmployeeInterface {
-    private final static int maxListSize = 10;
+    private final Map<String, Employee> employees;
 
-    List<Employee> employees = new ArrayList<>(Arrays.asList(
+    public EmployeeService(Map<String, Employee> employees) {
+        this.employees = employees;
+    }
+
+    private final static int maxMapSize = 10;
+
+    Map<String, Employee> employee = new HashMap(Map.of(
+            "Владимир Скрягин",
             new Employee("Владимир", "Скрягин"),
+            "Максим Чистоплюев",
             new Employee("Максим", "Чистоплюев"),
+            "Алина Незнайкина",
             new Employee("Алина", "Незнайкина"),
-            new Employee("Светлана", "Страдалкина"),
+            "Светлана Счастливина",
+            new Employee("Светлана", "Счастливина"),
+            "Никандра Капризулина",
             new Employee("Никандра", "Капризулькина"),
+            "Павел Вреднюкин",
             new Employee("Павел", "Вреднюкин"),
+            "Артем Хулиганкин",
             new Employee("Артем", "Хулиганкин"),
+            "Софья Засыпалкина",
             new Employee("Софья", "Засыпалкина"),
+            "Андрей Приставалкин",
             new Employee("Андрей", "Приставалкин")
     ));
 
     @Override
-    public List<Employee> printEmployee() {
-        return employees;
+    public Collection<Employee> printEmployee() {
+        return Collections.unmodifiableCollection(employees.values());
     }
 
     @Override
-    public void addEmployee(Employee employee) {
-        if (employees.size() >= maxListSize) {
+    public Employee addEmployee(String firstName, String lastName) {
+        Employee employee = new Employee(firstName, lastName);
+        if (employees.size() >= maxMapSize) {
             throw new EmployeeStorageIsFullException("Мест в организации нет");
-        } else if (employees.contains(employee)) {
+        } else if (employees.containsKey(employee.getFullName())) {
             throw new EmployeeAlreadyAddedException("Сотрудник уже добавлен");
         }
-        employees.add(employee);
+        employees.put(employee.getFullName(), employee);
+        return employee;
     }
 
     @Override
-    public void removeEmployee(Employee employee) {
-        if (!employees.contains(employee)) {
-            throw new EmployeeNotFoundException("Сотрудник не найден");
+    public Employee removeEmployee(String firstName, String lastName) {
+        Employee employee = new Employee(firstName, lastName);
+        if (employees.containsKey(employee.getFullName())) {
+           return employees.remove(employee.getFullName());
         }
-        employees.remove(employee);
+        throw new EmployeeNotFoundException("Сотрудник не найден");
     }
 
 
     @Override
-    public void findEmployee(Employee employee) {
-        if (!employees.contains(employee)) {
-            throw new EmployeeNotFoundException("Сотрудник не найден");
+    public Employee findEmployee(String firstName, String lastName) {
+        Employee employee = new Employee(firstName, lastName);
+        if (employees.containsKey(employee.getFullName())) {
+            return employees.get(employee.getFullName());
         }
-        employees.toString();
+        throw new EmployeeNotFoundException("Сотрудник не найден");
     }
 }

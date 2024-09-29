@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/employee")
 @RestController
@@ -18,15 +19,15 @@ public class EmployeeController {
     }
 
     @GetMapping(path = "/print")
-    public List<Employee> print() {
-        return employeeService.printEmployee();
+    public Map<String, Employee> print() {
+        return (Map<String, Employee>) employeeService.printEmployee();
     }
 
     @GetMapping(path = "/add")
     public String addEmployee(@RequestParam("firstName") String firstName,
                               @RequestParam("lastName") String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        employeeService.addEmployee(employee);
+        employeeService.addEmployee(firstName, lastName);
         return employee + " добавлен.";
     }
 
@@ -34,7 +35,7 @@ public class EmployeeController {
     public String removeEmployee(@RequestParam("firstName") String firstName,
                                  @RequestParam("lastName") String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        employeeService.removeEmployee(employee);
+        employeeService.removeEmployee(firstName, lastName);
         return employee + " удален.";
     }
 
@@ -42,7 +43,7 @@ public class EmployeeController {
     public String findEmployee(@RequestParam("firstName") String firstName,
                                @RequestParam("lastName") String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        employeeService.findEmployee(employee);
+        employeeService.findEmployee(firstName, lastName);
         return employee + " найден.";
     }
 }

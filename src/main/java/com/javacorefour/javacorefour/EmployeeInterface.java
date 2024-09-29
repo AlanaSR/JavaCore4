@@ -1,17 +1,13 @@
 package com.javacorefour.javacorefour;
 
 import java.util.Collection;
-import java.util.List;
 
 public interface EmployeeInterface {
+    Collection<Employee> printEmployee();
 
-    List<Employee> printEmployee();
+    Employee addEmployee(String firstName, String lastName);
 
-    void addEmployee(Employee employee);
+    Employee removeEmployee(String firstName, String lastName);
 
-    void removeEmployee(Employee employee);
-
-    void findEmployee(Employee employee);
-
-
+    Employee findEmployee(String firstName, String lastName);
 }
