@@ -16,28 +16,28 @@ public class EmployeeService implements EmployeeInterface {
 
     Map<String, Employee> employee = new HashMap(Map.of(
             "Владимир Скрягин",
-            new Employee("Владимир", "Скрягин"),
+            new Employee("Владимир", "Скрягин",56153,1),
             "Максим Чистоплюев",
-            new Employee("Максим", "Чистоплюев"),
+            new Employee("Максим", "Чистоплюев",84665,1),
             "Алина Незнайкина",
-            new Employee("Алина", "Незнайкина"),
+            new Employee("Алина", "Незнайкина",65432,2),
             "Светлана Счастливина",
-            new Employee("Светлана", "Счастливина"),
+            new Employee("Светлана", "Счастливина",84614,2),
             "Никандра Капризулина",
-            new Employee("Никандра", "Капризулькина"),
+            new Employee("Никандра", "Капризулькина",56448,3),
             "Павел Вреднюкин",
-            new Employee("Павел", "Вреднюкин"),
+            new Employee("Павел", "Вреднюкин",35464,5),
             "Артем Хулиганкин",
-            new Employee("Артем", "Хулиганкин"),
+            new Employee("Артем", "Хулиганкин",95145,4),
             "Софья Засыпалкина",
-            new Employee("Софья", "Засыпалкина"),
+            new Employee("Софья", "Засыпалкина",95156,4),
             "Андрей Приставалкин",
-            new Employee("Андрей", "Приставалкин")
+            new Employee("Андрей", "Приставалкин",86785,5)
     ));
 
     @Override
-    public Collection<Employee> printEmployee() {
-        return Collections.unmodifiableCollection(employees.values());
+    public List<Employee> printEmployee() {
+        return new ArrayList<>(employees.values());
     }
 
     @Override
@@ -56,7 +56,7 @@ public class EmployeeService implements EmployeeInterface {
     public Employee removeEmployee(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
         if (employees.containsKey(employee.getFullName())) {
-           return employees.remove(employee.getFullName());
+            return employees.remove(employee.getFullName());
         }
         throw new EmployeeNotFoundException("Сотрудник не найден");
     }
