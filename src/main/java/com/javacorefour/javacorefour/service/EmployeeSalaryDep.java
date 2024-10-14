@@ -1,4 +1,6 @@
-package com.javacorefour.javacorefour;
+package com.javacorefour.javacorefour.service;
+
+import com.javacorefour.javacorefour.Employee;
 
 import java.util.List;
 import java.util.Map;

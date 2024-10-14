@@ -32,11 +32,11 @@ public class Employee {
         return firstName + " " + lastName;
     }
 
-    public double getsalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setsalary(double salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 

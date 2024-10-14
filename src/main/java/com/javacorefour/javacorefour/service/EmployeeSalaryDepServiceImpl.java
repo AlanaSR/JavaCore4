@@ -1,5 +1,7 @@
-package com.javacorefour.javacorefour;
+package com.javacorefour.javacorefour.service;
 
+import com.javacorefour.javacorefour.Employee;
+import com.javacorefour.javacorefour.exception.EmployeeNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -13,38 +15,38 @@ import java.util.stream.Collectors;
 @Service
 public class EmployeeSalaryDepServiceImpl implements EmployeeSalaryDep {
 
-    private final EmployeeService employeeService;
+    private final EmployeeListService employeeListService;
 
-    public EmployeeSalaryDepServiceImpl(@Qualifier("employeeService") EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public EmployeeSalaryDepServiceImpl(@Qualifier("employeeListService") EmployeeListService employeeListService) {
+        this.employeeListService = employeeListService;
     }
 
     @Override
     public Employee maxSalaryDepartment(Integer departmentId) {
-        return employeeService.printEmployee().stream()
+        return employeeListService.printEmployee().stream()
                 .filter(employee -> employee.getDepartment() == departmentId)
-                .max(Comparator.comparing(Employee::getsalary))
+                .max(Comparator.comparing(Employee::getSalary))
                 .orElseThrow(() -> new EmployeeNotFoundException("Сотрудник не найден."));
     }
 
     @Override
     public Employee minSalaryDepartment(Integer departmentId) {
-        return employeeService.printEmployee().stream()
+        return employeeListService.printEmployee().stream()
                 .filter(employee -> employee.getDepartment() == departmentId)
-                .min(Comparator.comparing(Employee::getsalary))
+                .min(Comparator.comparing(Employee::getSalary))
                 .orElseThrow(() -> new EmployeeNotFoundException("Сотрудник не найден."));
     }
 
     @Override
     public List<Employee> allEmployeesInDepartment(Integer departmentId) {
-        return employeeService.printEmployee().stream()
+        return employeeListService.printEmployee().stream()
                 .filter(employee -> employee.getDepartment() == departmentId)
                 .collect(Collectors.toList());
     }
 
     @Override
     public Map<Integer, List<Employee>> allDepartmentsWithEmployees() {
-        return employeeService.printEmployee().stream()
+        return employeeListService.printEmployee().stream()
                 .collect(Collectors.groupingBy(Employee::getDepartment));
     }
 }

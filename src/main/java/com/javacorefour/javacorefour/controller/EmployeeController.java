@@ -1,5 +1,8 @@
-package com.javacorefour.javacorefour;
+package com.javacorefour.javacorefour.controller;
 
+import com.javacorefour.javacorefour.Employee;
+import com.javacorefour.javacorefour.service.EmployeeInterface;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +15,7 @@ import java.util.Map;
 public class EmployeeController {
     private final EmployeeInterface employeeService;
 
-    public EmployeeController(EmployeeInterface employeeService) {
+    public EmployeeController(@Qualifier("employeeService") EmployeeInterface employeeService) {
         this.employeeService = employeeService;
     }
 

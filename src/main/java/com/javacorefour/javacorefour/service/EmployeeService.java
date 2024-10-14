@@ -1,5 +1,10 @@
-package com.javacorefour.javacorefour;
+package com.javacorefour.javacorefour.service;
 
+import com.javacorefour.javacorefour.Employee;
+import com.javacorefour.javacorefour.exception.EmployeeAlreadyAddedException;
+import com.javacorefour.javacorefour.exception.EmployeeNotFoundException;
+import com.javacorefour.javacorefour.exception.EmployeeStorageIsFullException;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -14,7 +19,7 @@ public class EmployeeService implements EmployeeInterface {
 
     private final static int maxMapSize = 10;
 
-    Map<String, Employee> employee = new HashMap(Map.of(
+    Map<String, Employee> employee = new HashMap<>(Map.of(
             "Владимир Скрягин",
             new Employee("Владимир", "Скрягин",56153,1),
             "Максим Чистоплюев",
