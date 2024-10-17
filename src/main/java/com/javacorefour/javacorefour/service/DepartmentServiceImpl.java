@@ -13,17 +13,17 @@ import java.util.stream.Collectors;
 
 @Component
 @Service
-public class EmployeeSalaryDepServiceImpl implements EmployeeSalaryDep {
+public class DepartmentServiceImpl implements DepartmentService {
 
-    private final EmployeeListService employeeListService;
+    private final EmployeeInterface employeeInterface;
 
-    public EmployeeSalaryDepServiceImpl(@Qualifier("employeeListService") EmployeeListService employeeListService) {
-        this.employeeListService = employeeListService;
+    public DepartmentServiceImpl(@Qualifier("employeeListService") EmployeeInterface employeeInterface) {
+        this.employeeInterface = employeeInterface;
     }
 
     @Override
     public Employee maxSalaryDepartment(Integer departmentId) {
-        return employeeListService.printEmployee().stream()
+        return employeeInterface.AllEmployee().stream()
                 .filter(employee -> employee.getDepartment() == departmentId)
                 .max(Comparator.comparing(Employee::getSalary))
                 .orElseThrow(() -> new EmployeeNotFoundException("Сотрудник не найден."));
@@ -31,7 +31,7 @@ public class EmployeeSalaryDepServiceImpl implements EmployeeSalaryDep {
 
     @Override
     public Employee minSalaryDepartment(Integer departmentId) {
-        return employeeListService.printEmployee().stream()
+        return employeeInterface.AllEmployee().stream()
                 .filter(employee -> employee.getDepartment() == departmentId)
                 .min(Comparator.comparing(Employee::getSalary))
                 .orElseThrow(() -> new EmployeeNotFoundException("Сотрудник не найден."));
@@ -39,14 +39,14 @@ public class EmployeeSalaryDepServiceImpl implements EmployeeSalaryDep {
 
     @Override
     public List<Employee> allEmployeesInDepartment(Integer departmentId) {
-        return employeeListService.printEmployee().stream()
+        return employeeInterface.AllEmployee().stream()
                 .filter(employee -> employee.getDepartment() == departmentId)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
     public Map<Integer, List<Employee>> allDepartmentsWithEmployees() {
-        return employeeListService.printEmployee().stream()
+        return employeeInterface.AllEmployee().stream()
                 .collect(Collectors.groupingBy(Employee::getDepartment));
     }
 }

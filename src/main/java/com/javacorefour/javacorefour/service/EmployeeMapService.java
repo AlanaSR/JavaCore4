@@ -4,22 +4,21 @@ import com.javacorefour.javacorefour.Employee;
 import com.javacorefour.javacorefour.exception.EmployeeAlreadyAddedException;
 import com.javacorefour.javacorefour.exception.EmployeeNotFoundException;
 import com.javacorefour.javacorefour.exception.EmployeeStorageIsFullException;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
-public class EmployeeService implements EmployeeInterface {
+public class EmployeeMapService implements EmployeeInterface {
     private final Map<String, Employee> employees;
 
-    public EmployeeService(Map<String, Employee> employees) {
+    public EmployeeMapService(Map<String, Employee> employees) {
         this.employees = employees;
     }
 
     private final static int maxMapSize = 10;
 
-    Map<String, Employee> employee = new HashMap<>(Map.of(
+    Map<String, Employee> employee =new HashMap<>(Map.of(
             "Владимир Скрягин",
             new Employee("Владимир", "Скрягин",56153,1),
             "Максим Чистоплюев",
@@ -41,7 +40,7 @@ public class EmployeeService implements EmployeeInterface {
     ));
 
     @Override
-    public List<Employee> printEmployee() {
+    public List<Employee> AllEmployee() {
         return new ArrayList<>(employees.values());
     }
 
@@ -65,7 +64,6 @@ public class EmployeeService implements EmployeeInterface {
         }
         throw new EmployeeNotFoundException("Сотрудник не найден");
     }
-
 
     @Override
     public Employee findEmployee(String firstName, String lastName) {

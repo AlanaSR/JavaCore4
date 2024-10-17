@@ -5,7 +5,8 @@ import com.javacorefour.javacorefour.Employee;
 import java.util.List;
 import java.util.Map;
 
-public interface EmployeeSalaryDep {
+public interface DepartmentService {
+
     Employee maxSalaryDepartment(Integer departmentId);
 
     Employee minSalaryDepartment(Integer departmentId);

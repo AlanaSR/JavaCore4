@@ -8,8 +8,9 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
+
 @Primary
+@Service
 public class EmployeeListService implements EmployeeInterface {
     private final List<Employee> employees;
 
@@ -32,8 +33,8 @@ public class EmployeeListService implements EmployeeInterface {
     );
 
     @Override
-    public List<Employee> printEmployee() {
-        return employees;
+    public List<Employee> AllEmployee() {
+        return employee;
     }
 
     @Override
@@ -61,7 +62,7 @@ public class EmployeeListService implements EmployeeInterface {
     @Override
     public Employee findEmployee(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        if (employees.contains(employee.getFullName())) {
+        if (employees.contains(employee)) {
             return employee;
         }
         throw new EmployeeNotFoundException("Сотрудник не найден");

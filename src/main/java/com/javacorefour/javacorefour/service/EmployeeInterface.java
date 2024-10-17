@@ -3,9 +3,11 @@ package com.javacorefour.javacorefour.service;
 import com.javacorefour.javacorefour.Employee;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface EmployeeInterface {
-    Collection<Employee> printEmployee();
+
+    List<Employee> AllEmployee();
 
     Employee addEmployee(String firstName, String lastName);
 
