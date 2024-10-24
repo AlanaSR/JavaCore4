@@ -14,4 +14,7 @@ public interface EmployeeInterface {
     Employee removeEmployee(String firstName, String lastName);
 
     Employee findEmployee(String firstName, String lastName);
+
+    Employee changeFirstCharacterUp(String firstName, String lastName);
+
 }

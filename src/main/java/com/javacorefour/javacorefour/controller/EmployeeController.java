@@ -28,7 +28,8 @@ public class EmployeeController {
                               @RequestParam("lastName") String lastName) {
         Employee employee = new Employee(firstName, lastName);
         employeeInterface.addEmployee(firstName, lastName);
-        return employee + " добавлен.";
+//        employeeInterface.changeFirstCharacterUp(firstName,lastName);
+        return employeeInterface.changeFirstCharacterUp(firstName, lastName) + " добавлен.";
     }
 
     @GetMapping(path = "/remove")

@@ -4,6 +4,7 @@ import com.javacorefour.javacorefour.Employee;
 import com.javacorefour.javacorefour.exception.EmployeeAlreadyAddedException;
 import com.javacorefour.javacorefour.exception.EmployeeNotFoundException;
 import com.javacorefour.javacorefour.exception.EmployeeStorageIsFullException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -72,5 +73,12 @@ public class EmployeeMapService implements EmployeeInterface {
             return employees.get(employee.getFullName());
         }
         throw new EmployeeNotFoundException("Сотрудник не найден");
+    }
+
+    @Override
+    public Employee changeFirstCharacterUp(String firstName, String lastName) {
+        String firstName1 = StringUtils.capitalize(firstName);
+        String lastName1 = StringUtils.capitalize(lastName);
+        return new Employee(firstName1, lastName1);
     }
 }

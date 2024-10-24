@@ -4,6 +4,8 @@ import com.javacorefour.javacorefour.Employee;
 import com.javacorefour.javacorefour.exception.EmployeeAlreadyAddedException;
 import com.javacorefour.javacorefour.exception.EmployeeNotFoundException;
 import com.javacorefour.javacorefour.exception.EmployeeStorageIsFullException;
+import com.javacorefour.javacorefour.exception.InvalidInputException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -39,12 +41,14 @@ public class EmployeeListService implements EmployeeInterface {
 
     @Override
     public Employee addEmployee(String firstName, String lastName) {
+        checkEmployees(firstName, lastName);
         Employee employee = new Employee(firstName, lastName);
         if (employees.size() >= maxListSize) {
             throw new EmployeeStorageIsFullException("Мест в организации нет");
         } else if (employees.contains(employee)) {
             throw new EmployeeAlreadyAddedException("Сотрудник уже добавлен");
         }
+//        changeFirstCharacterUp(firstName,lastName);
         employees.add(employee);
         return employee;
     }
@@ -68,4 +72,18 @@ public class EmployeeListService implements EmployeeInterface {
         throw new EmployeeNotFoundException("Сотрудник не найден");
     }
 
+    @Override
+    public Employee changeFirstCharacterUp(String firstName, String lastName) {
+//        Employee employee = new Employee(firstName, lastName);
+//        StringUtils.capitalize(employee.getFullName());
+        String firstName1 = StringUtils.capitalize(firstName);
+        String lastName1 = StringUtils.capitalize(lastName);
+        return new Employee(firstName1, lastName1);
+    }
+
+    private void checkEmployees(String firstName, String lastName) {
+        if (!(StringUtils.isAlpha(firstName) && StringUtils.isAlpha(lastName))) {
+            throw new InvalidInputException("400 Bad Request");
+        }
+    }
 }
