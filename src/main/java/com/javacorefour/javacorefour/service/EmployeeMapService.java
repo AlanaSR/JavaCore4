@@ -74,11 +74,4 @@ public class EmployeeMapService implements EmployeeInterface {
         }
         throw new EmployeeNotFoundException("Сотрудник не найден");
     }
-
-    @Override
-    public Employee changeFirstCharacterUp(String firstName, String lastName) {
-        String firstName1 = StringUtils.capitalize(firstName);
-        String lastName1 = StringUtils.capitalize(lastName);
-        return new Employee(firstName1, lastName1);
-    }
 }

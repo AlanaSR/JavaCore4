@@ -15,6 +15,5 @@ public interface EmployeeInterface {
 
     Employee findEmployee(String firstName, String lastName);
 
-    Employee changeFirstCharacterUp(String firstName, String lastName);
 
 }
