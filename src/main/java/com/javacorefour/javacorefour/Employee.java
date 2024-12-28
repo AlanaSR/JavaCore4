@@ -13,16 +13,16 @@ public class Employee {
     private double salary;
     private int department;
 
-    public Employee(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
     public Employee(String firstName, String lastName, double salary, int department) {
         this.firstName = capitalize(firstName.toLowerCase());
         this.lastName = capitalize(lastName.toLowerCase());
         this.salary = salary;
         this.department = department;
+    }
+
+    public Employee(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public String getFirstName() {

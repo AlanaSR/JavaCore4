@@ -1,49 +1,42 @@
 package com.javacorefour.javacorefour.controller;
 
 import com.javacorefour.javacorefour.Employee;
-import com.javacorefour.javacorefour.service.EmployeeInterface;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.javacorefour.javacorefour.service.api.EmployeeService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("/employee")
 @RestController
 public class EmployeeController {
-    private final EmployeeInterface employeeInterface;
+    private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeInterface employeeInterface) {
-        this.employeeInterface = employeeInterface;
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     @GetMapping(path = "/print")
     public List<Employee> print() {
-        return (List<Employee>) employeeInterface.AllEmployee();
+        return (List<Employee>) employeeService.allEmployee();
     }
 
     @GetMapping(path = "/add")
-    public String addEmployee(@RequestParam("firstName") String firstName,
-                              @RequestParam("lastName") String lastName) {
-        Employee employee = new Employee(firstName, lastName);
-        employeeInterface.addEmployee(firstName, lastName);
+    public String addEmployee(@RequestBody Employee employee) {
+        employeeService.addEmployee(employee);
         return employee + " добавлен.";
-    }
-
-    @GetMapping(path = "/remove")
-    public String removeEmployee(@RequestParam("firstName") String firstName,
-                                 @RequestParam("lastName") String lastName) {
-        Employee employee = new Employee(firstName, lastName);
-        employeeInterface.removeEmployee(firstName, lastName);
-        return employee + " удален.";
     }
 
     @GetMapping(path = "/find")
     public String findEmployee(@RequestParam("firstName") String firstName,
                                @RequestParam("lastName") String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        employeeInterface.findEmployee(firstName, lastName);
+        employeeService.findEmployee(firstName, lastName);
         return employee + " найден.";
+    }
+
+    @GetMapping(path = "/remove")
+    public String removeEmployee(@RequestBody Employee employee) {
+        employeeService.removeEmployee(employee);
+        return employee + " удален.";
     }
 }

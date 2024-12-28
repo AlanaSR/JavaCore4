@@ -1,4 +1,4 @@
-package com.javacorefour.javacorefour.service;
+package com.javacorefour.javacorefour.service.api;
 
 import com.javacorefour.javacorefour.Employee;
 
@@ -7,11 +7,13 @@ import java.util.Map;
 
 public interface DepartmentService {
 
-    Employee maxSalaryDepartment(Integer departmentId);
+    Double maxSalaryDepartment(Integer departmentId);
 
-    Employee minSalaryDepartment(Integer departmentId);
+    Double minSalaryDepartment(Integer departmentId);
 
     List<Employee> allEmployeesInDepartment(Integer departmentId);
 
     Map<Integer, List<Employee>> allDepartmentsWithEmployees();
+
+    Double sumSalaryInDepartment(Integer departmentId);
 }
