@@ -17,14 +17,11 @@ import java.util.List;
 @Service
 public class EmployeeListServiceImpl implements EmployeeService {
     private final List<Employee> employees = new ArrayList<>();
-
     private final static int maxListSize = 10;
-
-    List<Employee> employee = new ArrayList<>();
 
     @Override
     public List<Employee> allEmployee() {
-        return  employee;
+        return  employees;
     }
 
     @Override

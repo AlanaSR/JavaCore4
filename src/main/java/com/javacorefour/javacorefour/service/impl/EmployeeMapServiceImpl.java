@@ -34,7 +34,7 @@ public class EmployeeMapServiceImpl implements EmployeeService {
 
     @Override
     public Employee removeEmployee(Employee employee) {
-     checkEmployees(employee.getFirstName(), employee.getLastName());
+        checkEmployees(employee.getFirstName(), employee.getLastName());
         if (employees.containsKey(employee.getFullName())) {
             return employees.remove(employee.getFullName());
         }

@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeMapServiceImplTest {
     private EmployeeListServiceImpl employeeService;
-    private final Employee pavel = new Employee("Pavel", "Pavlov", 13153.2, 1);
+    private final Employee pavel = new Employee("Pavel", "Pavlov");
     private final Employee maxon = new Employee("Maxon", "Patison", 11233.2, 2);
 
     @BeforeEach
@@ -22,12 +22,13 @@ class EmployeeMapServiceImplTest {
         employeeService.addEmployee(maxon);
         assertEquals(2, employeeService.allEmployee().size());
     }
+
     @Test
     void addEmployeeTest() {
         assertEquals(0, employeeService.allEmployee().size());
         employeeService.addEmployee(pavel);
-//        assertEquals(1, employeeListService.allEmployee().size());
-        assertEquals(pavel, employeeService.findEmployee("Pavel", "Pavlov"));
+        assertEquals(1, employeeService.allEmployee().size());
+        assertEquals(pavel, employeeService.findEmployee(pavel.getFirstName(), pavel.getLastName()));
     }
 
     @Test
