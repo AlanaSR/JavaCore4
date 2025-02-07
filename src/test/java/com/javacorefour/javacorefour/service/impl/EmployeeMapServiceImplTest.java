@@ -1,6 +1,7 @@
 package com.javacorefour.javacorefour.service.impl;
 
 import com.javacorefour.javacorefour.Employee;
+import com.javacorefour.javacorefour.exception.EmployeeNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,11 +34,10 @@ class EmployeeMapServiceImplTest {
 
     @Test
     void removeEmployeeTest() {
-        assertEquals(0, employeeService.allEmployee().size());
-        employeeService.addEmployee(pavel);
-        assertEquals(1, employeeService.allEmployee().size());
-        employeeService.removeEmployee(pavel);
-        assertEquals(0, employeeService.allEmployee().size());
+        employeeService.addEmployee(maxon);
+        assertFalse(employeeService.allEmployee().isEmpty());
+        employeeService.removeEmployee(maxon);
+        assertTrue(employeeService.allEmployee().isEmpty());
     }
 
     @Test

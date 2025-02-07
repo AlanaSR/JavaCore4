@@ -36,7 +36,8 @@ public class EmployeeMapServiceImpl implements EmployeeService {
     public Employee removeEmployee(Employee employee) {
         checkEmployees(employee.getFirstName(), employee.getLastName());
         if (employees.containsKey(employee.getFullName())) {
-            return employees.remove(employee.getFullName());
+            employees.remove(employee.getFullName());
+            return employee;
         }
         throw new EmployeeNotFoundException("Сотрудник не найден");
     }

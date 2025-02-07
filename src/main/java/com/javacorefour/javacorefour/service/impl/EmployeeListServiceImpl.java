@@ -41,6 +41,7 @@ public class EmployeeListServiceImpl implements EmployeeService {
         checkEmployees(employee.getFirstName(), employee.getLastName());
         if (employees.contains(employee)) {
             employees.remove(employee);
+            return employee;
         }
         throw new EmployeeNotFoundException("Сотрудник не найден");
     }
